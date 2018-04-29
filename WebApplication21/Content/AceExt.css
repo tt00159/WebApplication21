@@ -1,0 +1,48 @@
+body{
+    background-color: transparent;
+}
+.row{
+    margin-right: 0px;
+}
+
+.form-actions{
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding: 10px 10px 10px;
+}
+
+/* Åý jqGrid ªº Header ¸m¤¤ */
+.ui-jqgrid .ui-jqgrid-labels th
+{
+  text-align: center!important;
+  vertical-align: baseline!important;
+  height: 40px;
+}
+
+.ui-jqgrid .ui-jqgrid-pager{
+    height: 55px;
+}
+
+.ui-jqgrid .ui-jqgrid-pager>.ui-pager-control{
+    height: 28px;
+    padding-top: 0px!important;
+}
+
+.user-info{
+    max-width: 130px;
+}
+
+.bootbox-body{
+    font-size: 13pt;
+    color: #A94442;
+}
+
+.modal-header{
+    color: #A94442;
+}
+
+.tooltip-inner {
+    max-width: 350px;
+    /* If max-width does not work, try using width instead */
+    width: 350px; 
+}
