@@ -11,5 +11,6 @@ namespace WebApplication21.Models
         public string NameA { get; set; }
         public string NameB { get; set; }
         public Int32 Age { get; set; }
+        public DateTime CreateDate { get; set; }
     }
 }

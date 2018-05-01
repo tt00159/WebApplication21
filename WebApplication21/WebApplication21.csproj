@@ -296,6 +296,8 @@
     <Content Include="Scripts\grid\grid.js" />
     <Content Include="Scripts\grid\grid.min.js" />
     <Content Include="Scripts\grid\jquery.jqGrid.min.js" />
+    <Content Include="Scripts\Home\GridModify.js" />
+    <Content Include="Scripts\Home\GridDT.js" />
     <Content Include="Scripts\Home\GridTest.js" />
     <Content Include="Scripts\jquery-ui-1.12.1.js" />
     <Content Include="Scripts\jquery-ui-1.12.1.min.js" />
@@ -345,6 +347,8 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Home\GridTest.cshtml" />
+    <Content Include="Views\Home\GridDT.cshtml" />
+    <Content Include="Views\Home\GridModify.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

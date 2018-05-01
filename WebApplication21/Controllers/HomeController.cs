@@ -43,13 +43,26 @@ namespace WebApplication21.Controllers
             var empQuery = from emp in employees
                            where emp.Age > 20   
                            select emp;
-            //return Json(employees, JsonRequestBehavior.AllowGet);
+            return Json(employees, JsonRequestBehavior.AllowGet);          
 
+        }
 
+        [HttpPost]
+        public ActionResult GridTest()
+        {
 
+            return View();
+        }
+
+        public ActionResult GridDT(string SystemNo="")
+        {
+            if (SystemNo == "")     //此段fromLoad進來第一次若不判斷則會跑到下段直接return一個json的頁面內容
+            {
+                return View();
+            }
             #region  ==== 設定資料庫連線並取出資料 =====
             string Connection = ConfigurationManager.ConnectionStrings["HY"].ConnectionString;
-            string sql = "select * from hscode";
+            string sql = "select * from hscode WHERE   (HSCode LIKE '28%')";
             DataTable dt = new DataTable();
 
             using (SqlConnection conn = new SqlConnection(Connection))
@@ -58,7 +71,7 @@ namespace WebApplication21.Controllers
 
                 using (SqlCommand comm = new SqlCommand(sql, conn))
                 {
-                    
+
                     SqlDataAdapter adapter = new SqlDataAdapter(comm);
 
                     adapter.Fill(dt);
@@ -71,18 +84,52 @@ namespace WebApplication21.Controllers
             var qq = from qqtest in dt.AsEnumerable()
                      select new TestEmployeeCs
                      {
-                         NameA=qqtest.Field<string>("HSCode")
+                         ID = qqtest.Field<string>("HSCode"),
+                         NameA = qqtest.Field<string>("HSDesc"),
+                         NameB = qqtest.Field<string>("CreateUser"),
+                         CreateDate= qqtest.Field<DateTime>("CreateDate")
                      };
             #endregion
             return Json(qq, JsonRequestBehavior.AllowGet);
-
         }
 
-        [HttpPost]
-        public ActionResult GridTest()
+        public ActionResult GridModify(string SystemNo = "")
         {
+            if (SystemNo == "")     //此段fromLoad進來第一次若不判斷則會跑到下段直接return一個json的頁面內容
+            {
+                return View();
+            }
+            #region  ==== 設定資料庫連線並取出資料 =====
+            string Connection = ConfigurationManager.ConnectionStrings["HY"].ConnectionString;
+            string sql = "select * from hscode WHERE   (HSCode LIKE '28%')";
+            DataTable dt = new DataTable();
 
-            return View();
+            using (SqlConnection conn = new SqlConnection(Connection))
+            {
+                conn.Open();
+
+                using (SqlCommand comm = new SqlCommand(sql, conn))
+                {
+
+                    SqlDataAdapter adapter = new SqlDataAdapter(comm);
+
+                    adapter.Fill(dt);
+                    dt.TableName = "ResultData";
+                }
+            }
+            #endregion
+
+            #region  === dt資料轉linq
+            var qq = from qqtest in dt.AsEnumerable()
+                     select new TestEmployeeCs
+                     {
+                         ID = qqtest.Field<string>("HSCode"),
+                         NameA = qqtest.Field<string>("HSDesc"),
+                         NameB = qqtest.Field<string>("CreateUser"),
+                         CreateDate = qqtest.Field<DateTime>("CreateDate")
+                     };
+            #endregion
+            return Json(qq, JsonRequestBehavior.AllowGet);
         }
     }
 }
