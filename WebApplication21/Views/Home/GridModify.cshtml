@@ -19,23 +19,39 @@
         { name: 'note', index: 'note', width: 150, sortable: false },
         { name: 'ID', index: 'ID', width: 150, sortable: false },
         { name: 'NameA', index: 'NameA', width: 150, sortable: false },
-        { name: 'NameB', index: 'NameB', width: 150, sortable: false },
+        //{ name: 'NameB', index: 'NameB', width: 150, sortable: false },
+         {
+             name: "NameB", width: 100,
+             formatter: function (cellValue, option) {
+                 if (cellValue != "") cellValue = cellValue;
+                 return '<input type="text" id="txtNameB_' + option.rowId + '" value="' + cellValue + '"/>';
+             }
+         },
         {name: 'Age', index: 'Age', width: 150, sortable: false }
       ],
+      onSelectRow: function (id) {
+          var selarrrow = $("#grid_id").jqGrid('getGridParam', 'selarrrow');
+          if (selarrrow.length > 0) {
+              $("#jqInsertMaterial").removeClass("disabled");
+          }
+          else {
+              $("#jqInsertMaterial").addClass("disabled");
+          }
+      },
       multiselect: true,
       caption: "Manipulating Array Data"
      });  // jqGrid
 
     })
     </script>
-    <script src="~/Scripts/Home/GridDT.js"></script>
+    <script src="~/Scripts/Home/GridModify.js"></script>
 }
 
 <h2>GridDT</h2>
 <div class="widget-body">
     <div class="widget-main no-padding">
         @using (Html.BeginForm(
-                 "GridDT", "Home", FormMethod.Get,
+                 "GridModify", "Home", FormMethod.Get,
                  new { @class = "form-horizontal", id = "form", role = "form" }))
         {
             <div class="space-4"></div>
@@ -51,4 +67,17 @@
 
 <div>
     <table id="grid_id"></table>
+</div>
+
+
+
+
+
+<div class="btn-group">
+    <button id="jqInsertMaterial" class="btn btn-white btn-sm btn-pink btn-round ">
+        <i class="ace-icon fa fa-pencil-square bigger-120 "></i>
+        存檔
+    </button>
+
+
 </div>

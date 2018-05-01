@@ -92,7 +92,7 @@ namespace WebApplication21.Controllers
             #endregion
             return Json(qq, JsonRequestBehavior.AllowGet);
         }
-
+        [HttpGet]
         public ActionResult GridModify(string SystemNo = "")
         {
             if (SystemNo == "")     //此段fromLoad進來第一次若不判斷則會跑到下段直接return一個json的頁面內容
@@ -131,5 +131,18 @@ namespace WebApplication21.Controllers
             #endregion
             return Json(qq, JsonRequestBehavior.AllowGet);
         }
-    }
+
+        [HttpPost]
+        //public ActionResult GridModifyHandler(FormCollection post,TestEmployeeCs TEC)
+        public ActionResult GridModifyHandler(FormCollection post)
+        {
+            //var qq = post.NameA;  //沒有beginform的要用formcollection
+            var employees = new Employ().GetEmployeeList<TestEmployeeCs>().ToList();
+            var empQuery = from emp in employees
+                           where emp.Age > 20
+                           select emp;
+            return Json(employees, JsonRequestBehavior.AllowGet);
+        }
+
+        }
 }
